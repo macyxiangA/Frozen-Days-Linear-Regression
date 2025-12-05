@@ -19,7 +19,12 @@ The script performs the following steps:
 
 ## File
 
-- `frozen_days_regression.py` — main script with loading, normalization, linear regression, gradient descent, plotting, and prediction.
+- frozen_days_regression.py — main script
+- ice_data.csv — dataset containing `year` and `days`
+- toy.csv — small sample dataset for testing
+- data_plot.jpg — plot of frozen days vs. year (auto-generated)
+- loss_plot.jpg — gradient-descent loss plot (auto-generated)
+- README.md — documentation
 
 ## Requirements
 
@@ -35,31 +40,37 @@ You can install the requirements with:
 
 ## How to Run
 
-Prepare a CSV file, for example `frozen_days.csv`, with at least the following columns:
+Run the script with any CSV file:
 
-- `year`
-- `days`
+    python3 frozen_days_regression.py ice_data.csv
 
-Example:
+or:
 
-    year,days
-    1855,118
-    1860,120
-    1870,110
-    ...
+    python3 frozen_days_regression.py toy.csv
 
-Then run:
+After running, the script will:
 
-    python3 frozen_days_regression.py frozen_days.csv
+- Print the normalized design matrix (X_normalized)
+- Print closed-form regression weights
+- Print gradient-descent weights every 20 iterations
+- Output a prediction for year 2024
+- Output the sign of the slope (increasing or decreasing trend)
+- Output a simple explanation and model limitations
+- Save:
+  - data_plot.jpg
+  - loss_plot.jpg
 
-The script will:
+## What the Script Does
 
-- Print the normalized design matrix (Q2).
-- Print the closed-form weights (Q3).
-- Run gradient descent and print intermediate weights and the learning rate (Q4).
-- Save `data_plot.jpg` (year vs. frozen days).
-- Save `loss_plot.jpg` (iteration vs. loss).
-- Print the prediction for a future year (Q5) and simple interpretation and limitations (Q6, Q7).
+1. Loads year and frozen-day counts from CSV.  
+2. Plots the original data and saves the figure.  
+3. Normalizes year values to the range [0, 1].  
+4. Computes the linear regression solution using the closed-form formula.  
+5. Runs gradient descent using PyTorch for 200 iterations and tracks loss.  
+6. Saves a loss-curve plot.  
+7. Predicts frozen days for 2024.  
+8. Reports the trend direction (positive, negative, or none).  
+9. Prints why long-term predictions may not be reliable.
 
 ## Notes
 
